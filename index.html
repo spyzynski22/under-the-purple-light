@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Under the Purple Light</title>
+<meta name="description" content="A 27-goddess oracle deck for Purple Light Lounge — draw a card, browse the full deck, add your own goddesses, and keep a private reflection journal.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22%3E%3Ctext%20y=%22.9em%22%20font-size=%2290%22%3E%F0%9F%94%AE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
+<div id="rays"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div>
+<div id="motes"></div>
+
+<div class="wrap">
+  <div class="brand-label" id="brandLabel">Purple Light Lounge &nbsp;&#8226;&nbsp; Archetype Oracle</div>
+  <h1 class="title" id="deckTitle">Under the Purple Light</h1>
+  <p class="subtitle" id="deckSubtitle">Twenty seven goddesses, one message each. Pull a card when you need to remember what you carry.</p>
+
+  <div class="controls" id="filters">
+    <button class="pill active" data-filter="all">Whole deck</button>
+    <button class="pill" data-filter="Fire">Fire</button>
+    <button class="pill" data-filter="Water">Water</button>
+    <button class="pill" data-filter="Earth">Earth</button>
+    <button class="pill" data-filter="Air">Air</button>
+    <button class="pill" data-filter="Aether">Aether</button>
+  </div>
+
+  <div class="stage">
+    <div class="deck-card" id="deckCard" tabindex="0" role="button" aria-label="Draw a card">
+      <div class="flipper">
+        <div class="face back">
+          <svg class="back-art" viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFF6E0" stop-opacity="1"/>
+                <stop offset="45%" stop-color="#FFE3A3" stop-opacity="0.75"/>
+                <stop offset="100%" stop-color="#E86FD8" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="spokeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7DE8F7"/>
+                <stop offset="50%" stop-color="#C9A5FF"/>
+                <stop offset="100%" stop-color="#FF6FC8"/>
+              </linearGradient>
+            </defs>
+            <g class="spokes" stroke="url(#spokeGrad)" stroke-width="0.9" stroke-linecap="round" opacity="0.85">
+              <line x1="60" y1="8" x2="60" y2="30"/>
+              <line x1="60" y1="90" x2="60" y2="112"/>
+              <line x1="8" y1="60" x2="30" y2="60"/>
+              <line x1="90" y1="60" x2="112" y2="60"/>
+              <line x1="23" y1="23" x2="38" y2="38"/>
+              <line x1="82" y1="82" x2="97" y2="97"/>
+              <line x1="97" y1="23" x2="82" y2="38"/>
+              <line x1="38" y1="82" x2="23" y2="97"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(22.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(67.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(112.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(157.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(202.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(247.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(292.5 60 60)"/>
+              <line x1="60" y1="16" x2="60" y2="26" transform="rotate(337.5 60 60)"/>
+            </g>
+            <circle cx="60" cy="60" r="44" fill="none" stroke="#C9A5FF" stroke-opacity="0.28" stroke-dasharray="1 5" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="34" fill="url(#coreGlow)"/>
+            <path d="M60 40 L64 56 L80 60 L64 64 L60 80 L56 64 L40 60 L56 56 Z" fill="#FFF6E0" opacity="0.95"/>
+            <circle cx="60" cy="60" r="3.2" fill="#FFFFFF"/>
+          </svg>
+          <div class="back-word">Draw a Card</div>
+        </div>
+        <div class="face front" id="cardFront"></div>
+      </div>
+    </div>
+    <div class="hint" id="hint">Tap the card to draw</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="drawBtn">Draw a card</button>
+      <button class="btn btn-ghost" id="reflectBtn" style="display:none;">Sit with her</button>
+      <button class="btn btn-ghost" id="galleryBtn">Browse full deck</button>
+      <button class="btn btn-ghost" id="journalBtn">My journal</button>
+    </div>
+  </div>
+
+  <div id="gallerySection" style="display:none;">
+    <div class="section-head">
+      <h2>The Full Deck</h2>
+      <p id="deckCount"></p>
+    </div>
+    <p class="tap-hint">Tap any card to write with her &nbsp;&#8226;&nbsp; a star marks the ones you have written on</p>
+    <div class="gallery" id="gallery"></div>
+
+    <div class="adder">
+      <h3>Add your own goddess</h3>
+      <p class="help">Make this deck yours. Add a goddess, an archetype, or an aspect of Her you work with, and she gets shuffled in with the rest. Your cards save across sessions so they are here next time.</p>
+      <div class="row2">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="nameInput" placeholder="e.g. Bastet" maxlength="34">
+        </div>
+        <div class="field">
+          <label>Element</label>
+          <select id="elementField">
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+            <option value="Earth">Earth</option>
+            <option value="Air">Air</option>
+            <option value="Aether">Aether</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="titleInput" placeholder="e.g. Keeper of Pleasure" maxlength="44">
+        </div>
+        <div class="field">
+          <label>Tradition</label>
+          <input type="text" id="pantheonInput" placeholder="e.g. Egyptian" maxlength="28">
+        </div>
+      </div>
+      <div class="field">
+        <label>Her message</label>
+        <textarea id="messageInput" placeholder="e.g. Rest is allowed to be part of the plan. Take the afternoon." maxlength="240"></textarea>
+      </div>
+      <div class="field">
+        <label>Her invitation</label>
+        <input type="text" id="inviteInput" placeholder="e.g. Do one thing today purely because it feels good." maxlength="160">
+      </div>
+      <div class="adder-actions">
+        <button class="btn btn-primary" id="addBtn">Add to deck</button>
+        <button class="btn btn-ghost" id="clearMineBtn">Remove my cards</button>
+        <span class="muted-note" id="addNote"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="journalSection" style="display:none;">
+    <div class="section-head">
+      <h2>My Oracle Journal</h2>
+      <p id="journalCount"></p>
+    </div>
+    <div class="journal-actions" id="journalActions" style="display:none;">
+      <button class="btn btn-ghost" id="exportBtn">Download my journal</button>
+    </div>
+    <div id="journalList"></div>
+  </div>
+
+  <div class="footer">Made for <a href="https://www.skool.com/purple-light-lounge-6229/about" target="_blank" rel="noopener">Purple Light Lounge</a></div>
+
+  <div class="modal-overlay" id="reflectModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Write with this goddess">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-eyebrow">Sit with her</div>
+      <div class="modal-card" id="modalCard"></div>
+      <textarea id="reflectInput" placeholder="Write what comes up. No one sees this but you."  maxlength="4000"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="saveReflectBtn">Save to journal</button>
+        <span class="modal-note" id="modalNote"></span>
+      </div>
+      <div class="past" id="modalPast"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
